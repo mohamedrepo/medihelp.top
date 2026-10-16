@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#04070e" />
+    <!--
+      Gate the entrance animations on BOTH JavaScript being available and the
+      visitor not having requested reduced motion. Without this class the reveal
+      styles never hide anything, so content is always readable — with JS off,
+      with reduced motion, and before hydration.
+    -->
+    <script>
+      (function () {
+        try {
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('motion-ok');
+          }
+        } catch (error) {
+          /* No matchMedia support: leave the class off, content stays visible. */
+        }
+      })();
+    </script>
+    <!--
+      Replaced per route by scripts/prerender.mjs, which strips these two tags and
+      writes the route's own title, description, canonical and hreflang set. They
+      are here so the raw template is still a valid, sensibly titled document.
+    -->
+    <title>MediHelp Technologies — Practical Software and Business Automation</title>
+    <meta name="description" content="MediHelp Technologies builds software for business operations, fleet management, financial reporting, workflow automation and Windows diagnostics." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/entry-client.tsx"></script>
+  </body>
+</html>

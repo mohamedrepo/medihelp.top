@@ -1,0 +1,51 @@
+{
+  "name": "medihelp-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MediHelp Technologies — bilingual (EN/AR) software business website. Static prerendered site served by a Cloudflare Worker.",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:client && npm run build:ssr && npm run prerender && npm run verify",
+    "build:client": "vite build",
+    "build:ssr": "vite build --ssr src/entry-server.tsx",
+    "prerender": "node scripts/prerender.mjs",
+    "og:image": "node scripts/generate-og-image.mjs",
+    "verify": "node scripts/verify-build.mjs",
+    "serve": "wrangler dev --port 8787 --ip 127.0.0.1",
+    "preview": "npm run build && npm run serve",
+    "deploy": "npm run build && wrangler deploy",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.worker.json",
+    "types:worker": "wrangler types"
+  },
+  "dependencies": {
+    "hono": "^4.13.13",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/ibm-plex-sans-arabic": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^16.5.0",
+    "jsdom": "^30.1.2",
+    "lucide-react": "^1.57.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4",
+    "wrangler": "^4.151.0"
+  }
+}

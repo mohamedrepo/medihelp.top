@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "medihelp-website",
+  "main": "worker/index.ts",
+  // Matches the installed workerd runtime (workerd@1.20261012.1). A date beyond
+  // the runtime's release is rejected, and a date pinned to the runtime avoids
+  // silently adopting behaviour changes.
+  "compatibility_date": "2026-10-12",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  }
+
+  // NOTE: no `vars` block on purpose.
+  //
+  // Wrangler types literal values declared here (e.g. EMAIL_PROVIDER would be typed
+  // as the literal "resend"), which makes `provider === 'knock'` a type error. All
+  // contact configuration is therefore supplied at deploy time instead — see
+  // docs/DEPLOYMENT.md. Names expected by the Worker:
+  //
+  //   CONTACT_TO_EMAIL   (required)  recipient of contact notifications
+  //   CONTACT_FROM_EMAIL (required)  verified sender address
+  //   EMAIL_API_KEY      (required)  provider API key — always a secret
+  //   EMAIL_PROVIDER     (optional)  "resend" (default) or "knock"
+  //   KNOCK_WORKFLOW     (optional)  workflow slug, required when using Knock
+  //   APP_ORIGIN         (optional)  canonical origin for the origin check
+}

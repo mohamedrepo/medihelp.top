@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    // Use the types Wrangler generates from this project's own wrangler.jsonc,
+    // which reflect the actual workerd runtime version. `@types/*` packages are
+    // deliberately excluded: the Worker has no Node built-ins.
+    "types": []
+  },
+  "include": [
+    "worker",
+    "src/lib/contact-schema.ts",
+    "src/lib/contact-limits.ts",
+    "worker-configuration.d.ts"
+  ]
+}
